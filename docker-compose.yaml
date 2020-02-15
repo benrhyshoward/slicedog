@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/code/static
+    depends_on:
+      - web
+  web:
+    build: .
+    ports:
+      - 8000
+    volumes:
+      - static_volume:/code/static
+      - # fill in - volume to map a folder containing a GCP key into the container e.g. /dev/gcp:/gcp
+    environment:
+      - SECRET_KEY
+      - GOOGLE_APPLICATION_CREDENTIALS= # fill in - location of key within the container e.g. /gcp/service-key.json
+      - BUCKET_NAME= # fill in - name of the bucket where the images will be stored
+volumes:
+  static_volume:

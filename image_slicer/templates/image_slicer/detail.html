@@ -1,0 +1,54 @@
+{% extends "image_slicer/base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-5">
+            <div class="row">
+                <div class="col">
+                    <h4>Original</h4>
+                </div>
+                <div class="col text-right">
+                    <a href="{% url 'image_slicer:index' %}">choose another</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <img src="{{ bucket_root }}{{ image.path }}" class="img-fluid"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-2 mt-2">
+            <h4>Options</h4>
+            <form action="{% url 'image_slicer:detail' image.id %}" method="get">
+                <div class="form-row">
+                    <div class="form-group col-3 col-lg-12">
+                        <label for="vstripsinput">↔️ strips</label>
+                        <input type="number" min="1" max="{{ image.height }}"class="form-control" id="vstripsinput"
+                               name="v" value="{{request.GET.v}}" required/>
+                    </div>
+                    <div class="form-group col-3 col-lg-12">
+                        <label for="hstripsinput">↕️ strips</label>
+                        <input type="number" min="1" max="{{ image.width }}"class="form-control" id="hstripsinput"
+                               name="h" value="{{request.GET.h}}" required/>
+                    </div>
+                    <div class="form-group col-3 col-lg-12">
+                        <label for="iterations">Iterations</label>
+                        <input type="number" class="form-control" id="iterations"
+                               name="i" value="{{request.GET.i}}" min="1" max="50" required/>
+                    </div>
+                    <div class="form-group col-3 col-lg-12 text-center my-auto">
+                        <input type="submit"class="btn btn-primary" value="Slice">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12 col-lg-5">
+            <h4>Sliced</h4>
+            <a href="{{ sliced_url }}">
+                <img src="{{ sliced_url }}" class="img-fluid"/>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
