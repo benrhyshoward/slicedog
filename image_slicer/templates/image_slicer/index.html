@@ -1,0 +1,50 @@
+{% extends "image_slicer/base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Pick an image to slice</h2>
+        </div>
+        <div class="col text-right">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label class="btn btn-primary mt-1" for="my-file-selector">
+                    <input id="my-file-selector" type="file" name="uploaded-file" style="display:none"
+                    onchange="
+                    if (this.files[0].name){
+                        var filename = this.files[0].name.length>20 ? this.files[0].name.substring(0,20) + '...' : this.files[0].name;
+                        $('#upload-button').text('Upload ' + filename);
+                        $('#upload-button').css('display','inline');
+                    }">
+                    Browse
+                </label>
+                <!--<div class="form-group">-->
+                    <!--<input type="file" name="uploaded-file">-->
+                <!--</div>-->
+                <br>
+                <span class='label label-info text-danger'>
+                    {{ error_message }}
+                </span>
+                <button type="submit" class="btn btn-secondary mr-1" id="upload-button" style="display:none">
+                    Upload
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+            {% for image in images %}
+            <div class="col-sm-12 col-md-6 col-lg-4 text-center my-auto">
+                <a href="{% url 'image_slicer:detail' image.id %}">
+                    <img src="{{ bucket_root }}{{ image.path }}" class="img-fluid m-1" width="100%">
+                </a>
+            </div>
+            {% endfor %}
+    </form>
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+{% endblock content %}
