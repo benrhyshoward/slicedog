@@ -60,7 +60,6 @@ def index_view(request):
 def sliced_view(request, image_id):
     image_entry = get_object_or_404(Image, pk=image_id)
 
-    # image_url = request.scheme + '://' + request.get_host() + static(image_entry.path) # used locally
     image_url = GCP_BUCKET + image_entry.path
 
     image = PILImage.open(urllib.request.urlopen(image_url))
