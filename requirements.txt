@@ -1,7 +1,7 @@
 cachetools==3.1.0
 certifi==2019.3.9
 chardet==3.0.4
-Django==2.2.10
+Django==2.2.21
 google-api-core==1.10.0
 google-auth==1.6.3
 google-cloud-core==0.29.1
