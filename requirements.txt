@@ -10,7 +10,7 @@ google-resumable-media==0.3.2
 googleapis-common-protos==1.5.10
 gunicorn==19.9.0
 idna==2.8
-numpy==1.16.2
+numpy==1.22.0
 Pillow==6.2.0
 protobuf==3.7.1
 pyasn1==0.4.5
